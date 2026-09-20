@@ -21,8 +21,9 @@ mov r8b, byte ptr [rcx+rsi]
 cmp r8b, 0x2d
 je flag 
 
-cmp r8b, 0 
-je done 
+sub r8b, 0x30
+cmp r8b, 9
+ja done 
 
 lea rdi, [rcx+rsi] 
 call atoi_digit 
