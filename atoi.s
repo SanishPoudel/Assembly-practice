@@ -1,6 +1,11 @@
 .intel_syntax noprefix
 .global atoi_digit
 .global atoi
+.global _start
+
+_start:
+mov rdi, [rsp+16]
+call atoi
 
 atoi_digit:
 xor rax, rax
@@ -40,4 +45,6 @@ jmp loop
 done:
 mov rax, r9
 imul rax, r10
-ret
+mov rdi, rax
+mov rax, 60
+syscall
