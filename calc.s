@@ -12,7 +12,8 @@ call atoi
 pop rdi
 
 #now rax and rdi have the 2 numbers
-cmp byte ptr [rsp+24], 0x2b
+mov rsi, [rsp+24]
+cmp byte ptr [rsi], 0x2b
 jne failure
 add rdi, rax
 add rsp, 0x80
