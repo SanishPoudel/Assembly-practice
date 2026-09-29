@@ -13,9 +13,30 @@ pop rdi
 
 #now rax and rdi have the 2 numbers
 mov rsi, [rsp+24]
+
+#check for +
 cmp byte ptr [rsi], 0x2b
-jne failure
+je add
+
+#check for -
+cmp byte ptr [rsi], 0x2d
+je sub
+
+# if operator isn't supported
+failure:
+mov rax, 60
+mov rdi, 1
+syscall
+
+add:
 add rdi, rax
+jmp end
+
+sub:
+sub rdi, rax
+jmp end
+
+end:
 add rsp, 0x80
 mov rsi, rsp
 
@@ -33,8 +54,3 @@ mov rax, 60
 mov rdi, 0
 syscall
 
-# if operator isn't +
-failure:
-mov rax, 60
-mov rdi, 1
-syscall
