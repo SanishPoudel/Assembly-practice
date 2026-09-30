@@ -22,6 +22,10 @@ je add
 cmp byte ptr [rsi], 0x2d
 je sub
 
+#check for *
+cmp byte ptr [rsi], 0x2a
+je multiply
+
 # if operator isn't supported
 failure:
 mov rax, 60
@@ -34,6 +38,10 @@ jmp end
 
 sub:
 sub rdi, rax
+jmp end
+
+multiply:
+imul rdi, rax
 jmp end
 
 end:
